@@ -10,12 +10,12 @@
   },
   "servers": [
     {
-      "url": "http://127.0.0.1:5000/auth",
+      "url": "http://127.0.0.1:5000",
       "variables": {}
     }
   ],
   "paths": {
-    "/signup": {
+    "/auth/signup": {
       "post": {
         "tags": [
           "auth microservice"
@@ -52,7 +52,7 @@
         "deprecated": false
       }
     },
-    "/signin": {
+    "/auth/signin": {
       "post": {
         "tags": [
           "auth microservice"
