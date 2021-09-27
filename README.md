@@ -33,7 +33,7 @@ Set proper and long **SECRET_KEY** for generating secure jwt token.
 
 Setting **SMTP_SALT** will ensure more secure email generated tokens
 
-Set configured email address for **DEFAULT_SMTP_EMAIL** to send emails using SMTP protocol by *configured email* it
+Set configured email address for **DEFAULT_SMTP_EMAIL** to send emails using SMTP protocol. By *configured email* it
 means **allow less secure app access** for provided email, if not this microservice will not work properly.
 
 
