@@ -4,6 +4,12 @@ import jwt
 
 
 def generate_jwt_token(jwt_secret_key: str = '', **kwargs):
+    """
+    Generates a jwt token for further authentication use cases
+    :param jwt_secret_key: secret_key for encrypting jwt token
+    :param kwargs: additional data for token payload
+    :return: jwt token
+    """
     payload = {
             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=15, seconds=5),
             **kwargs
@@ -17,6 +23,11 @@ def generate_jwt_token(jwt_secret_key: str = '', **kwargs):
 
 
 def get_jwt_token_payload(token: str = ''):
+    """
+    Gets payload from token input if not available from flask request object Authorization header
+    :param token: jwt token
+    :return:
+    """
     if not token:
         token = request.headers.get('Authorization')
 

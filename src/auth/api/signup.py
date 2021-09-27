@@ -1,4 +1,7 @@
+from utils.schema_validator import ValidationInputType
+from utils.decorators import validate_schema
 from flask import Blueprint, jsonify, request, current_app
+from .schema import (signup, confirm_email)
 from src.auth.dal.model.user import User
 from utils.smtp import EmailType
 from src import db
@@ -9,7 +12,7 @@ auth_signup_bp = Blueprint('auth_signup_bp', __name__)
 
 
 @auth_signup_bp.route('/signup', methods=['POST'])
-# validate inputs
+@validate_schema(signup, input_type=ValidationInputType.BODY)
 def signup():
     email = request.json['email']
     username = request.json['username']
@@ -41,7 +44,7 @@ def signup():
 
 
 @auth_signup_bp.route('/email/confirm', methods=['GET'])
-# Validate input
+@validate_schema(confirm_email, input_type=ValidationInputType.QUERY_PARAM)
 def confirm_email():
     token = request.args['token']
     result = current_app.email.confirm_token(token)

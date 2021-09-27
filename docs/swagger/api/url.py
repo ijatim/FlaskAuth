@@ -3,6 +3,11 @@ from docs.swagger.api.swagger_ui import docs_swagger_ui_bp
 
 
 def register_docs_blueprint(app):
+    """
+    Registers swagger-ui route and API address to flask app
+    :param app: flask app
+    :return: None
+    """
     app.register_blueprint(docs_swagger_ui_bp)
 
     swagger_url = app.config['SWAGGER_URL']

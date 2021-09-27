@@ -1,6 +1,9 @@
-from flask import Blueprint, jsonify, request
-from src.auth.dal.model.user import User
+from utils.schema_validator import ValidationInputType
+from utils.decorators import validate_schema
 from utils.jwt_auth import generate_jwt_token
+from src.auth.dal.model.user import User
+from flask import Blueprint, jsonify, request
+from .schema import signin
 import hashlib
 import base64
 
@@ -8,7 +11,7 @@ auth_signin_bp = Blueprint('auth_signin_bp', __name__)
 
 
 @auth_signin_bp.route('/signin', methods=['POST'])
-# Validate inputs
+@validate_schema(signin, input_type=ValidationInputType.BODY)
 def signin():
     email = request.json['email']
     password = request.json['password']

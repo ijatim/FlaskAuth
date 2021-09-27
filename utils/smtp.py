@@ -130,6 +130,13 @@ class SMTP:
             raise Exception('Server cannot handle your request right now.')
 
     def send_mail(self, mail_type, receiver_email, **kwargs):
+        """
+        Sends email generates Exception if failure happens
+        :param mail_type: EmailType object to declare which template should be used for generating MIMEText html message
+        :param receiver_email: user's email
+        :param kwargs: user_id, email_id are required.
+        :return: None
+        """
         template = self.__generate_html_text(mail_type, **{'email': receiver_email, **kwargs})
         receiver_email = receiver_email
         message = MIMEMultipart()

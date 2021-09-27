@@ -1,26 +1,21 @@
+from utils.schema_validator import ValidationInputType
+from flask import current_app, request
 from functools import wraps
-from enum import Enum
 
 
-class ValidationInputType(Enum):
-    QUERY_PARAM = 1
-    URL_PARAM = 2
-    BODY = 3
-
-
-def schema_validator(schema, input_type: ValidationInputType = None):
+def validate_schema(schema, input_type: ValidationInputType = None):
     def wrapper(f):
         @wraps(f)
         def wrapped(*args, **kwargs):
-            # initialize validator
-
-            # validate input using validator and schema
-
-            # raise validation errors if available
-
-            # continue executing main function(f)
-
-            return f(*args, **kwargs)
+            schema_validator = current_app.schema_validator
+            try:
+                errors = schema_validator.get_errors(request, kwargs, schema, input_type)
+            except Exception as e:
+                raise e
+            if not errors:
+                return f(*args, **kwargs)
+            else:
+                raise Exception(errors[0].message)
 
         return wrapped
 
