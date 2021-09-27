@@ -18,16 +18,19 @@ def init_smtp(app):
     :param app: initialized flask app
     :return: None
     """
-
-    app.email = SMTP(
-        default_smtp_email=app.config['DEFAULT_SMTP_EMAIL'],
-        password=app.config['MAIL_DEFAULT_SENDER_PASSWORD'],
-        server=app.config['MAIL_SERVER'],
-        port=app.config['MAIL_SERVER_PORT'],
-        secret_key=app.config['SECRET_KEY'],
-        salt=app.config['SMTP_PASSWORD_SALT'],
-        backend_base_url=app.config['BACKEND_BASE_URL']
-    )
+    try:
+        app.email = SMTP(
+            default_smtp_email=app.config['DEFAULT_SMTP_EMAIL'],
+            password=app.config['DEFAULT_SMTP_EMAIL_PASSWORD'],
+            server=app.config['MAIL_SERVER'],
+            port=app.config['MAIL_SERVER_PORT'],
+            secret_key=app.config['SECRET_KEY'],
+            salt=app.config['SMTP_SALT'],
+            backend_base_url=app.config['BACKEND_BASE_URL']
+        )
+    except Exception as e:
+        raise Exception(f'SMTP initializing failed. Please configure service email address by allow less secure apps '
+                        f'to use provided email.\nMore info: {e}')
 
 
 # This protocol sends email to user.
