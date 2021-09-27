@@ -10,5 +10,9 @@ def handle_exception(error):
     :param error: an instance of raised Exception
     :return: Response Object of flask
     """
-    pass
-
+    return jsonify(
+        {
+            'code': 0,
+            'message': str(error)
+        }
+    )

@@ -13,7 +13,6 @@ def generate_jwt_token(jwt_secret_key: str = '', **kwargs):
         jwt_secret_key if jwt_secret_key else current_app.config['SECRET_KEY'],
         algorithm='HS256'
     )
-    jwt_token = jwt_token.decode("utf-8")
     return "Bearer " + jwt_token
 
 

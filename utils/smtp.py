@@ -1,4 +1,4 @@
-from itsdangerous import URLSafeTimedSerializer
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from os import path, listdir
@@ -88,21 +88,21 @@ class SMTP:
         args = re.findall("{.*?}", html_text)
         return args
 
-    def __generate_html_text(self, mail_param):
-        html_file_name = self.type_to_file_info[mail_param['mail_type']]['file_name']
-        extra_args = self.__generate_html_text_args(html_file_name, mail_param)
-        template = self.html_texts[html_file_name].format(**extra_args, **mail_param)
+    def __generate_html_text(self, mail_type, **kwargs):
+        html_file_name = self.type_to_file_info[mail_type]['file_name']
+        extra_args = self.__generate_html_text_args(html_file_name, kwargs)
+        template = self.html_texts[html_file_name].format(**extra_args, **kwargs)
         return template
 
     def __generate_html_text_args(self, html_file_name, mail_param):
         output_args = {}
         if '{expanding_url}' in self.html_texts_setting[html_file_name]:
-            output_args['expanding_url'] = url_for('account_user_profile.confirm_email')
+            output_args['expanding_url'] = url_for('auth_signup_bp.confirm_email')
         if '{token}' in self.html_texts_setting[html_file_name]:
             output_args['token'] = self.generate_token(mail_param)
         if '{backend_base_url}' in self.html_texts_setting[html_file_name]:
             output_args['backend_base_url'] = self.backend_base_url
-        if html_file_name == self.type_to_file_info[EmailType.CONFIRMATION_MAIL]['file_name']:
+        if html_file_name == self.type_to_file_info[EmailType.CONFIRMATION]['file_name']:
             pass
 
         return output_args
@@ -119,19 +119,23 @@ class SMTP:
                                     salt=self.salt,
                                     max_age=expiration)
             info = info.split('-')
-            return {'EmailID': info[0],
-                    'UserID': info[1],
-                    'Email': info[2]}
-        except Exception:
+            return {'email_id': info[0],
+                    'user_id': info[1],
+                    'email': info[2]}
+
+        except SignatureExpired:
+            raise Exception('Your requested url is expired.')
+
+        except Exception as e:
             raise Exception('Server cannot handle your request right now.')
 
-    def send_mail(self, email_type, receiver_email, **kwargs):
-        template = self.__generate_html_text(**kwargs)
+    def send_mail(self, mail_type, receiver_email, **kwargs):
+        template = self.__generate_html_text(mail_type, **{'email': receiver_email, **kwargs})
         receiver_email = receiver_email
         message = MIMEMultipart()
         message["From"] = self.default_smtp_email
         message["To"] = receiver_email
-        message["Subject"] = self.type_to_file_info[email_type]['subject']
+        message["Subject"] = self.type_to_file_info[mail_type]['subject']
         message["Bcc"] = receiver_email
 
         message.attach(MIMEText(template, "html"))
@@ -140,6 +144,7 @@ class SMTP:
             self.__initialize_server()
             try:
                 self.connection.sendmail(self.default_smtp_email, receiver_email, message.as_string())
+                return
             except Exception:
                 continue
 

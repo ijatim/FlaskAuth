@@ -1,5 +1,8 @@
-from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
+from flask import Flask
+
+db = SQLAlchemy()
 
 
 def create_flask_app():
@@ -21,5 +24,11 @@ def create_flask_app():
     # initialize specific utils for auth microservice like database, smtp and etc
     from utils.smtp import init_smtp
     init_smtp(app)
+
+    from src.auth.dal.model.user import User
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
+        db.session.commit()
 
     return app
