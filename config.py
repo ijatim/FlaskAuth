@@ -13,3 +13,5 @@ class AuthConfig:
     MAIL_SERVER = os.getenv('MAIL_SERVER')
     MAIL_SERVER_PORT = os.getenv('MAIL_SERVER_PORT')
     SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
+    SWAGGER_URL = os.getenv('SWAGGER_URL')
+    SWAGGER_API_URL = os.getenv('SWAGGER_API_URL')

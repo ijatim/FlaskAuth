@@ -1,0 +1,147 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AuthMicro",
+    "contact": {
+      "name": "hamed kazerooni",
+      "email": "hamed.k_99@yahoo.com"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:5000/auth",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/signup": {
+      "post": {
+        "tags": [
+          "auth microservice"
+        ],
+        "summary": "signup",
+        "operationId": "signup",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/signuprequest"
+              },
+              "example": {
+                "email": "hamed.k_99@yahoo.com",
+                "username": "ijatim",
+                "password": "ijatim"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Response code = [1]",
+            "headers": {}
+          },
+          "400": {
+            "description": "Response code = [0]",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/signin": {
+      "post": {
+        "tags": [
+          "auth microservice"
+        ],
+        "summary": "signin",
+        "operationId": "signin",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/signinrequest"
+              },
+              "example": {
+                "email": "hamed.k_99@yahoo.com",
+                "password": "ijatim"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Response code = [1]",
+            "headers": {}
+          },
+          "400": {
+            "description": "Response code = [0]",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "signuprequest": {
+        "title": "signup",
+        "required": [
+          "email",
+          "username",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "hamed.k_99@yahoo.com",
+          "username": "ijatim",
+          "password": "ijatim"
+        }
+      },
+      "signinrequest": {
+        "title": "signin",
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "hamed.k_99@yahoo.com",
+          "password": "ijatim"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "auth microservice",
+      "description": ""
+    }
+  ]
+}
