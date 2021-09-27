@@ -37,7 +37,7 @@ def signup():
             'code': 1,
             'message': 'Successful'
         }
-    )
+    ), 200
 
 
 @auth_signup_bp.route('/email/confirm', methods=['GET'])
@@ -66,4 +66,4 @@ def confirm_email():
             'code': 1,
             'message': 'Successful'
         }
-    )
+    ), 200

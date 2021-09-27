@@ -15,4 +15,4 @@ def handle_exception(error):
             'code': 0,
             'message': str(error)
         }
-    )
+    ), 400
