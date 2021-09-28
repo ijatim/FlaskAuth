@@ -78,7 +78,7 @@ class SMTP:
         return True if status == 250 else False
 
     def __initialize_html_texts(self):
-        html_files_path = path.join(path.dirname(__file__), '../template/email/')
+        html_files_path = path.join(path.dirname(__file__), '../templates/email/')
         for file in listdir(html_files_path):
             self.html_texts = {}
             if file.endswith('.html'):

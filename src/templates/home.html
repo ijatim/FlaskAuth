@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  Flask Auth Micro
+</h1>
+<h3 class="subtitle">
+  You have successfully logged in into you account and your token is {{ request.args.get('token') }}
+</h3>
+{% endblock %}
