@@ -87,6 +87,40 @@
         },
         "deprecated": false
       }
+    },
+    "/google/signin": {
+      "get": {
+        "tags": [
+          "google login"
+        ],
+        "summary": "Google signin",
+        "operationId": "Googlesignin",
+        "parameters": [],
+        "responses": {
+          "308": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/google/callback": {
+      "get": {
+        "tags": [
+          "google login"
+        ],
+        "summary": "Google callback",
+        "operationId": "Googlecallback",
+        "parameters": [],
+        "responses": {
+          "308": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
     }
   },
   "components": {
@@ -141,6 +175,10 @@
   "tags": [
     {
       "name": "auth microservice",
+      "description": ""
+    },
+    {
+      "name": "google login",
       "description": ""
     }
   ]
