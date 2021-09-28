@@ -1,3 +1,4 @@
+from oauthlib.oauth2 import WebApplicationClient
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask import Flask
@@ -17,11 +18,13 @@ def create_flask_app():
     app.config.from_object('config.AuthConfig')
 
     # register flask blueprints
+    from src.home.api.home import home_home_bp
     from src.auth.api.signin import auth_signin_bp
     from src.auth.api.signup import auth_signup_bp
     from utils.error_handler import error_bp
     from docs.swagger.api.url import register_docs_blueprint
 
+    app.register_blueprint(home_home_bp, url_prefix='/')
     app.register_blueprint(auth_signin_bp, url_prefix='/auth')
     app.register_blueprint(auth_signup_bp, url_prefix='/auth')
     app.register_blueprint(error_bp)
@@ -33,6 +36,7 @@ def create_flask_app():
 
     init_smtp(app)
     init_schema_validator(app)
+    app.oauth_client = WebApplicationClient(app.config['GOOGLE_CLIENT_ID'])
 
     # initialize database
     from src.auth.dal.model.user import User

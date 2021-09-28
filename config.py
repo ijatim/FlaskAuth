@@ -12,6 +12,9 @@ class AuthConfig:
     DEFAULT_SMTP_EMAIL_PASSWORD = os.getenv('DEFAULT_SMTP_EMAIL_PASSWORD')
     MAIL_SERVER = os.getenv('MAIL_SERVER')
     MAIL_SERVER_PORT = os.getenv('MAIL_SERVER_PORT')
+    GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+    GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
+    GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configuration"
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../authdb.sqlite'
     SWAGGER_URL = '/docs'
     SWAGGER_API_URL = '/openapi/auth_swagger.json'

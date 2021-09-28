@@ -23,3 +23,7 @@ confirm_email = {
         'token': {'type': 'string'}
     }
 }
+
+google_callback = {
+    'required': ['code']
+}
