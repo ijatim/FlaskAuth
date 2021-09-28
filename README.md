@@ -50,6 +50,12 @@ In order to run project simply setup *.env* file and run following command insid
     //Windows
     [project_root_directory] > python app.py
 
+### Using google login
+
+By entering following url into your browser you can start process of logging using google account and finnaly you will be redirected to a view which requires token to access.
+
+> https://127.0.0.1:5000/auth/google/signin
+
 ## Swagger
 
 You can access swagger-ui provided to project services by accessing following url:
