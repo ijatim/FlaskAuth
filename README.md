@@ -26,6 +26,8 @@ DEFAULT_SMTP_EMAIL =
 DEFAULT_SMTP_EMAIL_PASSWORD =
 MAIL_SERVER = smtp.gmail.com
 MAIL_SERVER_PORT = 587
+GOOGLE_CLIENT_ID = 
+GOOGLE_CLIENT_SECRET = 
 ```
 Set proper and long **SECRET_KEY** for generating secure jwt token.
 
@@ -36,6 +38,7 @@ Setting **SMTP_SALT** will ensure more secure email generated tokens
 Set configured email address for **DEFAULT_SMTP_EMAIL** to send emails using SMTP protocol. By *configured email* it
 means **allow less secure app access** for provided email, if not this microservice will not work properly.
 
+Provide **GOOGLE_CLIENT_ID** and **GOOGLE_CLIENT_SECRET** by registering this app to provided email address in your google cloud panel.
 
 ## Running
 Since this project aims at design level, using this project for ___production___ environments is discouraged. For production purposes **gunicorn**, **docker** and high-end fast **database** are the minimum requirements.
