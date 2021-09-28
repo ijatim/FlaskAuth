@@ -97,7 +97,7 @@
         "operationId": "Googlesignin",
         "parameters": [],
         "responses": {
-          "308": {
+          "302": {
             "description": "",
             "headers": {}
           }
@@ -114,7 +114,7 @@
         "operationId": "Googlecallback",
         "parameters": [],
         "responses": {
-          "308": {
+          "302": {
             "description": "",
             "headers": {}
           }
