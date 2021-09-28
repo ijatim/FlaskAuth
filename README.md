@@ -20,7 +20,7 @@ pip install -r requirements.txt
 In the **.env** file in root directory of project you'll see all configurations that can be changed by user.
 ```
 SECRET_KEY = 
-BACKEND_BASE_URL = 127.0.0.1:5000
+BACKEND_BASE_URL = https://127.0.0.1:5000
 SMTP_SALT = 
 DEFAULT_SMTP_EMAIL = 
 DEFAULT_SMTP_EMAIL_PASSWORD =
@@ -50,6 +50,6 @@ In order to run project simply setup *.env* file and run following command insid
 ## Swagger
 
 You can access swagger-ui provided to project services by accessing following url:
-> 127.0.0.1:5000/docs
+> https://127.0.0.1:5000/docs
 
 ![swagger-ui](docs/swagger/static/auth_swagger.jpg)
