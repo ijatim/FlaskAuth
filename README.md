@@ -56,6 +56,8 @@ By entering following url into your browser you can start process of logging usi
 
 > https://127.0.0.1:5000/auth/google/signin
 
+Since registered app for default email address in .env file is for **testing** purposes, if you want to login with new gmail you have to register it in google cloud panel. (PASSWORD is available in .env file)
+
 ## Swagger
 
 You can access swagger-ui provided to project services by accessing following url:
